@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(171, 222, 244);
+}
+
+#box {
+    background-color: rgb(43, 119, 205);
+    color: white;
+    width: 60%;
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 20px;
+    border: 2px solid blueviolet;
+    border-radius: 10px;
+    font-family: Arial;
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+h1{
+    text-align: center;
+}
+
+#submit{
+    background-color: rgb(61, 16, 104);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#Weight{
+    padding: 8px 20px;
+}
+
+#Height{
+    padding: 8px 20px;
+}
+
+#Age{
+   padding: 8px 20px;
+}
+
+#Activity{
+  padding: 8px 20px;
+}
+
+table {
+    width: 70%;
+    margin: 30px auto;
+    color: white;
+    font-size: 18px;
+}
+
+table th {
+    background-color: rgb(60, 90, 180);
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid blueviolet;
+}
+td {
+    padding: 12px;
+}
+table,
+table th,
+table td {
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+
+#hm{
+    font-size: 15px;
+    color : rgb(201, 200, 200)
+}

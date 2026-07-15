@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Analytics Dashboard | D3.js</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <!-- D3.js CDN -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+            </div>
+            <nav>
+                <div class="nav-item active">Dashboard</div>
+                <div class="nav-item">Reports</div>
+                <div class="nav-item">Analytics</div>
+                <div class="nav-item">Settings</div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Sales Performance Overview</h1>
+                <div class="user-profile">
+                    <span>Admin User</span>
+                    <div class="avatar"></div>
+                </div>
+            </header>
+
+            <!-- KPI Cards Row -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-info">
+                        <span class="label">Total Revenue</span>
+                        <h3 class="value">$124,500</h3>
+                        <span class="trend up">+12.5%</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-info">
+                        <span class="label">Active Users</span>
+                        <h3 class="value">12,430</h3>
+                        <span class="trend up">+8.2%</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-info">
+                        <span class="label">Conversion Rate</span>
+                        <h3 class="value">3.2%</h3>
+                        <span class="trend down">-0.4%</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-info">
+                        <span class="label">Avg Order Value</span>
+                        <h3 class="value">$85</h3>
+                        <span class="trend up">+2.1%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <!-- Line Chart -->
+                <div class="chart-container large">
+                    <div class="chart-header">
+                        <h2>Revenue Trend</h2>
+                        <div class="chart-actions">
+                            <button id="updateData">Update Data</button>
+                        </div>
+                    </div>
+                    <div id="lineChart" class="chart-content"></div>
+                </div>
+
+                <!-- Bar Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2>Sales by Category</h2>
+                    </div>
+                    <div id="barChart" class="chart-content"></div>
+                </div>
+
+                <!-- Donut Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2>Order Segment</h2>
+                    </div>
+                    <div id="donutChart" class="chart-content"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip" style="opacity: 0;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

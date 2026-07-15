@@ -1,0 +1,45 @@
+body {
+    color: rgb(22, 20, 19);
+    background-color: rgb(212, 143, 143);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+     font-family: 'Segoe UI', Arial, sans-serif; 
+}
+
+#main {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.box {
+    width: 300px;
+    background-color: rgb(155, 161, 44);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-top: 20px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+img {
+    height: 250px;
+    width: 250px;
+    border-radius: 8px;
+}
+
+ol, pre {
+    text-align: left;
+    font-size: 15px;
+}

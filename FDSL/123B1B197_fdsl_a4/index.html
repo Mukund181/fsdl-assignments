@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Weather Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f4f6f9;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .chart-container {
+            width: 70%;
+            margin: 20px auto;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Weather Dashboard</h1>
+
+    <button onclick="updateData()">Change Week Data</button>
+
+    <div class="chart-container">
+        <canvas id="tempChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="humidityChart"></canvas>
+    </div>
+
+<script>
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    let temperatureData = [30, 32, 31, 29, 35, 36, 34];
+    let humidityData = [60, 65, 55, 70, 75, 68, 72];
+
+    const tempChart = new Chart(document.getElementById("tempChart"), {
+        type: "line",
+        data: {
+            labels: days,
+            datasets: [{
+                label: "Temperature (°C)",
+                data: temperatureData,
+                borderColor: "blue",
+                fill: false,
+                tension: 0.3
+            }]
+        }
+    });
+
+    const humidityChart = new Chart(document.getElementById("humidityChart"), {
+        type: "bar",
+        data: {
+            labels: days,
+            datasets: [{
+                label: "Humidity (%)",
+                data: humidityData,
+                backgroundColor: "green"
+            }]
+        }
+    });
+
+    function updateData() {
+        temperatureData = temperatureData.map(() => 
+            Math.floor(Math.random() * 10) + 28
+        );
+
+        humidityData = humidityData.map(() => 
+            Math.floor(Math.random() * 20) + 50
+        );
+
+        tempChart.data.datasets[0].data = temperatureData;
+        humidityChart.data.datasets[0].data = humidityData;
+
+        tempChart.update();
+        humidityChart.update();
+    }
+</script>
+
+</body>
+</html>

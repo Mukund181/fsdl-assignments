@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mukund Fegade | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #9a7d83; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .hero-section {
+            background-color: #f4eeef;
+            padding: 100px 0;
+        }
+
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s;
+        }
+
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #83676c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">MF</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-section text-center">
+        <div class="container">
+            <img src="mukund.jpg" class="rounded-circle mb-4 shadow" width="180" alt="Mukund Fegade">
+            <h1 class="display-3 fw-bold">Hi, I am <span class="text-primary">Mukund Fegade</span></h1>
+            <p class="lead">Welcome to my professional portfolio.</p>
+        </div>
+    </header>
+
+    <section id="about" class="py-5 bg-white border-bottom">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">About Me</h2>
+            <h4 class="text-secondary">Computer Science Student @ PCCOE</h4>
+            <p class="text-muted mx-auto mt-3" style="max-width: 700px; font-size: 1.1rem;">
+                Individual with a passion for solving problems and building software. 
+                Specializing in Data Structures, ML, and Frontend Development. I thrive in environments 
+                that challenge my technical skills and allow me to grow within a team.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Technical Skills</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                    <div class="p-4 bg-white border rounded shadow-sm h-100">
+                        <h5 class="fw-bold text-primary">Languages</h5>
+                        <p class="mb-0">C++, Python, MySQL, HTML/CSS</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-4 bg-white border rounded shadow-sm h-100">
+                        <h5 class="fw-bold text-primary">Data Science</h5>
+                        <p class="mb-0">Machine Learning, Deep Learning, BERT, Power BI</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-4 bg-white border rounded shadow-sm h-100">
+                        <h5 class="fw-bold text-primary">Tools</h5>
+                        <p class="mb-0">Git, GitHub, VS Code</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">My Projects</h2>
+        <div class="row g-4">
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-uppercase text-muted small fw-bold mb-2">Machine Learning</div>
+                        <h5 class="card-title fw-bold text-primary">Mental Health Sentiment Analysis</h5>
+                        <p class="card-text text-muted">Utilized BERT to classify and analyze mental health-related sentiments in text data, helping identify patterns in emotional well-being.</p>
+                        <div class="mt-auto">
+                            <span class="badge bg-dark mb-3">Python</span> <span class="badge bg-dark mb-3">BERT / NLP</span>
+                            <a href="https://github.com/Mukund181" class="btn btn-outline-secondary btn-sm w-100">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-uppercase text-muted small fw-bold mb-2">Web Development</div>
+                        <h5 class="card-title fw-bold text-primary">Modern Calculator</h5>
+                        <p class="card-text text-muted">A sleek, responsive calculator built with HTML5 and CSS3. Features a clean UI with hover effects and grid-based layout logic.</p>
+                        <div class="mt-auto">
+                            <span class="badge bg-primary mb-3">HTML5</span> <span class="badge bg-primary mb-3">CSS3</span>
+                            <a href="https://github.com/Mukund181" class="btn btn-outline-secondary btn-sm w-100">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-uppercase text-muted small fw-bold mb-2">Cybersecurity</div>
+                        <h5 class="card-title fw-bold text-primary">Data Encryption & Decryption</h5>
+                        <p class="card-text text-muted">Implemented cryptographic algorithms using C++ data structures to secure and retrieve sensitive information efficiently.</p>
+                        <div class="mt-auto">
+                            <span class="badge bg-success mb-3">C++</span> <span class="badge bg-success mb-3">DSA</span>
+                            <a href="https://github.com/Mukund181" class="btn btn-outline-secondary btn-sm w-100">View Source</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-uppercase text-muted small fw-bold mb-2">Data Analytics</div>
+                        <h5 class="card-title fw-bold text-primary">Market Basket Recommender</h5>
+                        <p class="card-text text-muted">Analyzed consumer purchasing patterns using Python to identify associations between products, visualized in Power BI.</p>
+                        <div class="mt-auto">
+                            <span class="badge bg-info text-dark mb-3">Python</span> <span class="badge bg-info text-dark mb-3">Power BI</span>
+                            <a href="https://github.com/Mukund181" class="btn btn-outline-secondary btn-sm w-100">View Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-uppercase text-muted small fw-bold mb-2">Data Science</div>
+                        <h5 class="card-title fw-bold text-primary">Climate Analysis & Rainfall Prediction</h5>
+                        <p class="card-text text-muted">Developed a predictive model to analyze climate patterns and forecast rainfall based on historical weather datasets.</p>
+                        <div class="mt-auto">
+                            <span class="badge bg-warning text-dark mb-3">Pandas</span> <span class="badge bg-warning text-dark mb-3">Matplotlib</span>
+                            <a href="https://github.com/Mukund181" class="btn btn-outline-secondary btn-sm w-100">View Analysis</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Contact Me</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form wordclass="bg-white p-4 rounded shadow-sm">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control" placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" class="form-control" rows="4" placeholder="" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-custom w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4 text-center">
+        <div class="container">
+            <p class="mb-1">Email: mukund.fegade@gmail.com | Phone: +91 8459220768</p>
+            <div class="mt-2">
+                <a href="https://github.com/Mukund181" class="text-white me-3 text-decoration-none">GitHub</a>
+                <a href="https://www.linkedin.com/in/mukund-fegade-355825115/" class="text-white text-decoration-none">LinkedIn</a>
+            </div>
+            <small class="text-muted d-block mt-3">&copy; 2026 Mukund Fegade. All Rights Reserved.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

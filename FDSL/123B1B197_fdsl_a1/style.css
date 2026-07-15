@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: rgb(112, 112, 139);
+}
+img {
+    width : 100px;
+    height: 100px;
+}
+
+h1{
+    text-align:center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+ 
+#tb{
+    background-color: rgb(137, 190, 237);
+    border-style: solid;
+    text-align: left;
+    width : 70%;
+    margin-left : auto;
+    margin-right: auto; 
+}

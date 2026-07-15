@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailBus - Travel Agency</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        header { background: #333; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 24px; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; }
+        .container { max-width: 900px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .hero { text-align: center; margin-bottom: 30px; }
+        .booking-search { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
+        .booking-search input, .booking-search select, .booking-search button { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        .booking-search button { background: #007bff; color: white; border: none; cursor: pointer; transition: background 0.3s; }
+        .booking-search button:hover { background: #0056b3; }
+        h2 { border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .type-selector { display: flex; gap: 20px; margin-bottom: 20px; font-weight: bold; }
+        .type-selector label { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RailBus</h1>
+        <nav>
+            <% if (user) { %>
+                <span>Welcome, <%= user.username %> (<%= user.role %>)</span>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login">Login</a>
+                <a href="/signup">Sign Up</a>
+            <% } %>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h2>Track & Book Expresses & Buses Across India</h2>
+            <p>Real-time dynamic schedules for seamless travel.</p>
+        </div>
+
+        <form action="/search" method="GET">
+            <div class="type-selector">
+                <label><input type="radio" name="type" value="rail" checked> Rail</label>
+                <label><input type="radio" name="type" value="bus"> Bus</label>
+            </div>
+            <div class="booking-search">
+                <input type="text" name="from" placeholder="Origin City (e.g. Delhi)" required>
+                <input type="text" name="to" placeholder="Destination City (e.g. Mumbai)" required>
+                <input type="date" name="date" required>
+                <button type="submit" style="grid-column: span 3;">Search Schedules</button>
+            </div>
+        </form>
+
+        <section id="results">
+            <% if (schedules && schedules.length > 0) { %>
+                <h3>Available <%= schedules[0].type.toUpperCase() %> Trips</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #eee;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">From</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">To</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Departure</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Arrival</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Price</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% schedules.forEach(s => { %>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><%= s.from %></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><%= s.to %></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><%= s.departure.toLocaleString() %></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><%= s.arrival.toLocaleString() %></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">₹<%= s.price %></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">
+                                    <form action="/book" method="POST">
+                                        <input type="hidden" name="scheduleId" value="<%= s._id %>">
+                                        <button type="submit" style="padding: 5px 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Book</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } else if (typeof(schedules) !== 'undefined') { %>
+                <p>No schedules found for the selected route.</p>
+            <% } %>
+        </section>
+    </div>
+</body>
+</html>

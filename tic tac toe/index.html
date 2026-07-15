@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A premium Tic Tac Toe game with stunning visuals, animations, and score tracking."
+    />
+    <title>Tic Tac Toe – Premium Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Animated background orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="title">
+          <span class="title-x">X</span>
+          <span class="title-sep">⬡</span>
+          <span class="title-o">O</span>
+        </h1>
+        <p class="subtitle">Tic Tac Toe</p>
+      </header>
+
+      <!-- Score Board -->
+      <div class="scoreboard">
+        <div class="score-card score-x" id="score-card-x">
+          <div class="score-symbol">X</div>
+          <div class="score-label">Player X</div>
+          <div class="score-value" id="score-x">0</div>
+        </div>
+        <div class="score-card score-draw">
+          <div class="score-symbol draw-sym">✦</div>
+          <div class="score-label">Draws</div>
+          <div class="score-value" id="score-draw">0</div>
+        </div>
+        <div class="score-card score-o" id="score-card-o">
+          <div class="score-symbol">O</div>
+          <div class="score-label">Player O</div>
+          <div class="score-value" id="score-o">0</div>
+        </div>
+      </div>
+
+      <!-- Status message -->
+      <div class="status-wrapper">
+        <div class="status-indicator" id="status-indicator"></div>
+        <p class="status-msg" id="status-msg">Player X's Turn</p>
+      </div>
+
+      <!-- Game Board -->
+      <div class="board" id="board" role="grid" aria-label="Tic Tac Toe Board">
+        <div class="cell" id="cell-0" role="gridcell" tabindex="0" aria-label="Cell 1"></div>
+        <div class="cell" id="cell-1" role="gridcell" tabindex="0" aria-label="Cell 2"></div>
+        <div class="cell" id="cell-2" role="gridcell" tabindex="0" aria-label="Cell 3"></div>
+        <div class="cell" id="cell-3" role="gridcell" tabindex="0" aria-label="Cell 4"></div>
+        <div class="cell" id="cell-4" role="gridcell" tabindex="0" aria-label="Cell 5"></div>
+        <div class="cell" id="cell-5" role="gridcell" tabindex="0" aria-label="Cell 6"></div>
+        <div class="cell" id="cell-6" role="gridcell" tabindex="0" aria-label="Cell 7"></div>
+        <div class="cell" id="cell-7" role="gridcell" tabindex="0" aria-label="Cell 8"></div>
+        <div class="cell" id="cell-8" role="gridcell" tabindex="0" aria-label="Cell 9"></div>
+        <!-- Win line SVG overlay -->
+        <svg class="win-line-svg" id="win-line-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <line id="win-line" x1="0" y1="0" x2="0" y2="0" />
+        </svg>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        <button class="btn btn-primary" id="btn-restart" aria-label="Restart Game">
+          <span class="btn-icon">↺</span> New Game
+        </button>
+        <button class="btn btn-secondary" id="btn-reset-scores" aria-label="Reset Scores">
+          <span class="btn-icon">⊘</span> Reset Scores
+        </button>
+      </div>
+
+      <!-- Mode Toggle -->
+      <div class="mode-toggle">
+        <span class="mode-label">2 Players</span>
+        <label class="toggle-switch" for="ai-toggle" aria-label="Toggle AI Mode">
+          <input type="checkbox" id="ai-toggle" />
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="mode-label">vs AI</span>
+      </div>
+    </div>
+
+    <!-- Win / Draw Modal -->
+    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal">
+        <div class="modal-emoji" id="modal-emoji">🏆</div>
+        <h2 class="modal-title" id="modal-title">Player X Wins!</h2>
+        <p class="modal-sub" id="modal-sub">Amazing move! Keep it up.</p>
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="modal-play-again">Play Again</button>
+          <button class="btn btn-secondary" id="modal-close">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

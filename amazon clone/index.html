@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amazon Clone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ember+Display:wght@400;700&family=Amazon+Ember:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --amazon-orange: #FF9900;
+      --amazon-dark: #131921;
+      --amazon-mid: #232F3E;
+      --amazon-light-blue: #37475A;
+      --amazon-link: #007185;
+      --amazon-link-hover: #C7511F;
+      --amazon-red: #B12704;
+      --amazon-btn: #FFD814;
+      --amazon-btn-hover: #F7CA00;
+      --amazon-add: #FFA41C;
+      --amazon-add-hover: #FF8F00;
+      --white: #ffffff;
+      --light-gray: #F3F3F3;
+      --border: #DDD;
+      --text: #0F1111;
+      --text-secondary: #565959;
+      --star: #FF9900;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Amazon Ember', Arial, sans-serif;
+      background: var(--light-gray);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: var(--amazon-dark);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-top {
+      display: flex;
+      align-items: center;
+      padding: 8px 16px;
+      gap: 10px;
+      min-height: 60px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      padding: 6px 8px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .logo:hover { border-color: white; }
+    .logo-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    .logo-text span { color: var(--amazon-orange); }
+    .logo-dot { color: var(--amazon-orange); font-size: 26px; vertical-align: -3px; }
+
+    .deliver-to {
+      display: flex;
+      flex-direction: column;
+      padding: 6px 8px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+      color: white;
+    }
+    .deliver-to:hover { border-color: white; }
+    .deliver-to .small { font-size: 11px; color: #CCC; }
+    .deliver-to .big { font-size: 13px; font-weight: 700; }
+    .deliver-to .icon { font-size: 16px; }
+
+    .search-bar {
+      flex: 1;
+      display: flex;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 40px;
+    }
+    .search-category {
+      background: #F3F3F3;
+      border: none;
+      padding: 0 10px;
+      font-size: 12px;
+      color: #555;
+      cursor: pointer;
+      border-right: 1px solid #CCC;
+      min-width: 60px;
+    }
+    .search-category:hover { background: #E8E8E8; }
+    .search-input {
+      flex: 1;
+      border: none;
+      padding: 0 12px;
+      font-size: 15px;
+      outline: none;
+      color: var(--text);
+    }
+    .search-btn {
+      background: var(--amazon-orange);
+      border: none;
+      padding: 0 16px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #333;
+      transition: background 0.15s;
+    }
+    .search-btn:hover { background: #E88A00; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      cursor: pointer;
+      color: white;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-item:hover { border-color: white; }
+    .nav-item .small { font-size: 11px; color: #CCC; }
+    .nav-item .big { font-size: 13px; font-weight: 700; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      cursor: pointer;
+      color: white;
+    }
+    .cart-item:hover { border-color: white; }
+    .cart-icon { font-size: 28px; position: relative; }
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--amazon-orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-label { font-size: 13px; font-weight: 700; }
+
+    .nav-bottom {
+      background: var(--amazon-light-blue);
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      height: 38px;
+      gap: 2px;
+      overflow-x: auto;
+    }
+    .nav-bottom::-webkit-scrollbar { display: none; }
+    .nav-bottom-item {
+      padding: 6px 10px;
+      font-size: 13px;
+      color: white;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .nav-bottom-item:hover { border-color: white; }
+    .nav-bottom-item.bold { font-weight: 700; }
+
+    /* ===== HERO BANNER ===== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      max-height: 500px;
+    }
+    .hero-slider {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .hero-slide {
+      min-width: 100%;
+      height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-slide:nth-child(1) { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); }
+    .hero-slide:nth-child(2) { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); }
+    .hero-slide:nth-child(3) { background: linear-gradient(135deg, #134e5e, #71b280); }
+
+    .hero-content {
+      text-align: center;
+      color: white;
+      padding: 40px;
+      max-width: 600px;
+    }
+    .hero-content h1 { font-size: 36px; font-weight: 700; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .hero-content p { font-size: 17px; margin-bottom: 24px; opacity: 0.9; }
+    .hero-btn {
+      background: var(--amazon-btn);
+      color: #111;
+      border: none;
+      padding: 12px 32px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .hero-btn:hover { background: var(--amazon-btn-hover); transform: translateY(-1px); }
+
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      font-size: 24px;
+      width: 44px;
+      height: 80px;
+      cursor: pointer;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+      z-index: 10;
+    }
+    .hero-arrow:hover { background: rgba(255,255,255,0.4); }
+    .hero-arrow.left { left: 0; border-radius: 0 4px 4px 0; }
+    .hero-arrow.right { right: 0; border-radius: 4px 0 0 4px; }
+
+    .hero-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+    .hero-dot {
+      width: 8px; height: 8px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .hero-dot.active { background: white; }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* ===== DEAL STRIP ===== */
+    .deal-strip {
+      background: white;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow-x: auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    }
+    .deal-strip::-webkit-scrollbar { height: 4px; }
+    .deal-strip::-webkit-scrollbar-thumb { background: #CCC; border-radius: 4px; }
+    .deal-strip h2 { font-size: 18px; flex-shrink: 0; color: var(--amazon-red); }
+    .deal-timer { background: #232F3E; color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .deal-tags { display: flex; gap: 8px; }
+    .deal-tag {
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--amazon-link);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .deal-tag:hover { border-color: var(--amazon-link); background: #EAF4F4; }
+
+    /* ===== GRID ===== */
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+
+    .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 14px; }
+
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .card-item { text-align: center; cursor: pointer; }
+    .card-item img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #F5F5F5;
+      margin-bottom: 4px;
+    }
+    .card-item p { font-size: 12px; color: var(--text-secondary); }
+
+    .card-link {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--amazon-link);
+      cursor: pointer;
+    }
+    .card-link:hover { color: var(--amazon-link-hover); text-decoration: underline; }
+
+    /* ===== PRODUCTS SECTION ===== */
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .products-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-behavior: smooth;
+    }
+    .products-row::-webkit-scrollbar { height: 4px; }
+    .products-row::-webkit-scrollbar-thumb { background: #CCC; border-radius: 4px; }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      padding: 14px;
+      min-width: 200px;
+      max-width: 200px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .product-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.15); transform: translateY(-2px); }
+
+    .product-img-wrap {
+      background: #F7F7F7;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-img-wrap img { width: 85%; height: 85%; object-fit: contain; }
+
+    .product-title {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .stars { color: var(--star); font-size: 13px; }
+    .review-count { font-size: 12px; color: var(--amazon-link); }
+
+    .price-row { margin: 6px 0; }
+    .price-small { font-size: 11px; vertical-align: top; }
+    .price-big { font-size: 20px; font-weight: 700; }
+    .price-dec { font-size: 13px; }
+    .original-price { font-size: 12px; color: var(--text-secondary); text-decoration: line-through; }
+    .discount-badge { font-size: 12px; color: var(--amazon-red); font-weight: 700; }
+    .prime-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 11px;
+      color: #00A8E0;
+      font-weight: 700;
+    }
+    .prime-icon { font-style: italic; }
+
+    .add-btn {
+      width: 100%;
+      background: var(--amazon-btn);
+      border: none;
+      padding: 7px 0;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.15s;
+    }
+    .add-btn:hover { background: var(--amazon-btn-hover); }
+
+    /* ===== BANNER STRIPS ===== */
+    .banner-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .mini-banner {
+      border-radius: 8px;
+      padding: 24px 20px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .mini-banner h3 { font-size: 16px; font-weight: 700; position: relative; z-index: 1; }
+    .mini-banner p { font-size: 13px; opacity: 0.9; position: relative; z-index: 1; margin-top: 4px; }
+    .mini-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .banner-emoji {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 52px;
+      opacity: 0.35;
+    }
+
+    /* ===== SECTION WRAPPER ===== */
+    .section-wrap {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .see-all {
+      font-size: 13px;
+      color: var(--amazon-link);
+      cursor: pointer;
+    }
+    .see-all:hover { text-decoration: underline; color: var(--amazon-link-hover); }
+
+    /* ===== CART MODAL ===== */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      display: none;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+    .cart-overlay.open { display: flex; }
+
+    .cart-panel {
+      background: white;
+      width: 420px;
+      height: 100vh;
+      overflow-y: auto;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-header {
+      background: var(--amazon-dark);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+    }
+    .cart-header h2 { font-size: 20px; }
+    .cart-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .cart-body { flex: 1; padding: 16px; }
+
+    .cart-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+    }
+    .cart-empty p { font-size: 16px; margin-top: 8px; }
+
+    .cart-item-row {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item-img {
+      width: 80px;
+      height: 80px;
+      background: #F7F7F7;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .cart-item-img img { width: 90%; height: 90%; object-fit: contain; }
+    .cart-item-info { flex: 1; }
+    .cart-item-title { font-size: 13px; font-weight: 400; margin-bottom: 4px; }
+    .cart-item-price { font-size: 15px; font-weight: 700; color: var(--amazon-red); }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .qty-btn {
+      width: 26px; height: 26px;
+      border: 1px solid var(--border);
+      background: var(--light-gray);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .qty-btn:hover { background: #DDD; }
+    .qty-num { font-size: 14px; font-weight: 700; min-width: 20px; text-align: center; }
+
+    .cart-remove { font-size: 12px; color: var(--amazon-link); cursor: pointer; margin-top: 4px; }
+    .cart-remove:hover { text-decoration: underline; }
+
+    .cart-footer {
+      padding: 16px;
+      border-top: 1px solid var(--border);
+      background: white;
+      position: sticky;
+      bottom: 0;
+    }
+    .cart-subtotal { font-size: 15px; margin-bottom: 12px; }
+    .cart-subtotal span { font-weight: 700; }
+    .checkout-btn {
+      width: 100%;
+      background: var(--amazon-btn);
+      border: none;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .checkout-btn:hover { background: var(--amazon-btn-hover); }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--amazon-dark);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--amazon-mid);
+      color: white;
+      padding: 40px 0 0;
+      margin-top: 40px;
+    }
+    .footer-back-top {
+      background: var(--amazon-light-blue);
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .footer-back-top:hover { background: #4A6375; }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding: 32px 60px;
+    }
+    .footer-col h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: #CCC; font-size: 13px; text-decoration: none; }
+    .footer-col ul li a:hover { text-decoration: underline; }
+
+    .footer-bottom {
+      background: var(--amazon-dark);
+      padding: 24px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-logo { font-size: 24px; font-weight: 700; color: white; }
+    .footer-logo span { color: var(--amazon-orange); }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { color: #CCC; font-size: 12px; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-copy { color: #CCC; font-size: 12px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .section-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); padding: 24px 20px; }
+      .banner-strip { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .section-grid { grid-template-columns: 1fr 1fr; }
+      .banner-strip { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-top { padding: 6px 8px; }
+      .deliver-to { display: none; }
+      .cart-panel { width: 100vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="nav-top">
+    <a class="logo" onclick="showToast('Welcome to Amazon Clone!')">
+      <span class="logo-text">amazon<span>.in</span></span>
+    </a>
+
+    <div class="deliver-to">
+      <span class="small">📍 Deliver to</span>
+      <span class="big">Mumbai 400001</span>
+    </div>
+
+    <div class="search-bar">
+      <select class="search-category">
+        <option>All</option>
+        <option>Electronics</option>
+        <option>Fashion</option>
+        <option>Books</option>
+        <option>Home</option>
+        <option>Sports</option>
+      </select>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search Amazon.in" />
+      <button class="search-btn" onclick="handleSearch()">🔍</button>
+    </div>
+
+    <div class="nav-actions">
+      <div class="nav-item">
+        <span class="small">Hello, Sign in</span>
+        <span class="big">Account & Lists ▾</span>
+      </div>
+      <div class="nav-item">
+        <span class="small">Returns</span>
+        <span class="big">& Orders</span>
+      </div>
+      <div class="cart-item" onclick="openCart()">
+        <div class="cart-icon" style="position:relative;">
+          🛒
+          <div class="cart-count" id="cartCount">0</div>
+        </div>
+        <span class="cart-label">Cart</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-bottom">
+    <div class="nav-bottom-item bold">☰ All</div>
+    <div class="nav-bottom-item">Today's Deals</div>
+    <div class="nav-bottom-item">Customer Service</div>
+    <div class="nav-bottom-item">Registry</div>
+    <div class="nav-bottom-item">Gift Cards</div>
+    <div class="nav-bottom-item">Sell</div>
+    <div class="nav-bottom-item" style="color: #FF9900;">Amazon Pay</div>
+    <div class="nav-bottom-item">Buy Again</div>
+    <div class="nav-bottom-item">Electronics</div>
+    <div class="nav-bottom-item">Fashion</div>
+    <div class="nav-bottom-item">Prime</div>
+    <div class="nav-bottom-item">Mobiles</div>
+    <div class="nav-bottom-item">Books</div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+      <div class="hero-content">
+        <h1>🎉 Great Indian Festival</h1>
+        <p>Up to 80% off on Electronics, Fashion, Home & more</p>
+        <button class="hero-btn">Shop Now</button>
+      </div>
+    </div>
+    <div class="hero-slide" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
+      <div class="hero-content">
+        <h1>🖥️ Upgrade Your Tech</h1>
+        <p>Latest Laptops, Phones & Gadgets at unbeatable prices</p>
+        <button class="hero-btn">Explore Deals</button>
+      </div>
+    </div>
+    <div class="hero-slide" style="background: linear-gradient(135deg, #093028, #237A57);">
+      <div class="hero-content">
+        <h1>🌿 Fresh Fashion Arrivals</h1>
+        <p>New season styles — starting from ₹199</p>
+        <button class="hero-btn">Shop Fashion</button>
+      </div>
+    </div>
+  </div>
+  <button class="hero-arrow left" onclick="slideHero(-1)">‹</button>
+  <button class="hero-arrow right" onclick="slideHero(1)">›</button>
+  <div class="hero-dots">
+    <div class="hero-dot active" onclick="goToSlide(0)"></div>
+    <div class="hero-dot" onclick="goToSlide(1)"></div>
+    <div class="hero-dot" onclick="goToSlide(2)"></div>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main-content">
+
+  <!-- Deal Strip -->
+  <div class="deal-strip">
+    <h2>⚡ Today's Deals</h2>
+    <div class="deal-timer" id="dealTimer">⏰ 04:23:17</div>
+    <div class="deal-tags">
+      <div class="deal-tag">Electronics</div>
+      <div class="deal-tag">Fashion</div>
+      <div class="deal-tag">Home</div>
+      <div class="deal-tag">Kitchen</div>
+      <div class="deal-tag">Books</div>
+      <div class="deal-tag">Toys</div>
+      <div class="deal-tag">Sports</div>
+      <div class="deal-tag">Beauty</div>
+    </div>
+  </div>
+
+  <!-- 4 Category Cards -->
+  <div class="section-grid">
+    <div class="card">
+      <h3>Pick up where you left off</h3>
+      <div class="card-grid">
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71mEsHyzSCL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=📱'" />
+          <p>Smartphones</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71jG+e7roXL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=💻'" />
+          <p>Laptops</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71JLN5f-xLL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🎧'" />
+          <p>Headphones</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/81qQy8kNBQL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=📺'" />
+          <p>Televisions</p>
+        </div>
+      </div>
+      <a class="card-link">See all recommendations →</a>
+    </div>
+
+    <div class="card">
+      <h3>Fashion deals</h3>
+      <div class="card-grid">
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71d7rfSl2fL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=👕'" />
+          <p>Men's T-Shirts</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/91Iqpg2NzHL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=👗'" />
+          <p>Women's Kurtas</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71nRBGFDvsL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=👟'" />
+          <p>Sneakers</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/81+dNnT9MyL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=👜'" />
+          <p>Handbags</p>
+        </div>
+      </div>
+      <a class="card-link">Explore all fashion →</a>
+    </div>
+
+    <div class="card">
+      <h3>Home & Kitchen</h3>
+      <div class="card-grid">
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71GJNfT0MQL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🛋️'" />
+          <p>Sofas</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71jVlxkJNmL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🍳'" />
+          <p>Cookware</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/81aGF0s3ZKL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🪴'" />
+          <p>Decor</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71Swqqe7XAL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🧹'" />
+          <p>Cleaning</p>
+        </div>
+      </div>
+      <a class="card-link">See more →</a>
+    </div>
+
+    <div class="card">
+      <h3>Gaming essentials</h3>
+      <div class="card-grid">
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71iYDytxFFL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🎮'" />
+          <p>Controllers</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71X3GktQFFl._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🖱️'" />
+          <p>Gaming Mouse</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71x1DhTe+UL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=⌨️'" />
+          <p>Keyboards</p>
+        </div>
+        <div class="card-item">
+          <img src="https://m.media-amazon.com/images/I/71hU+9FcxrL._AC_UY218_.jpg" onerror="this.src='https://via.placeholder.com/100x100/F7F7F7/333?text=🖥️'" />
+          <p>Monitors</p>
+        </div>
+      </div>
+      <a class="card-link">Shop all gaming →</a>
+    </div>
+  </div>
+
+  <!-- Mini Banners -->
+  <div class="banner-strip">
+    <div class="mini-banner" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
+      <span class="banner-emoji">📱</span>
+      <h3>Mobiles Fest</h3>
+      <p>Up to 40% off on top brands</p>
+    </div>
+    <div class="mini-banner" style="background: linear-gradient(135deg, #c62a2a, #9b1b1b);">
+      <span class="banner-emoji">🔥</span>
+      <h3>Flash Sale</h3>
+      <p>Lightning deals every hour</p>
+    </div>
+    <div class="mini-banner" style="background: linear-gradient(135deg, #1a6b1a, #145214);">
+      <span class="banner-emoji">🌿</span>
+      <h3>Green Week</h3>
+      <p>Eco-friendly products on sale</p>
+    </div>
+  </div>
+
+  <!-- Products Section -->
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-title">Best Sellers in Electronics</div>
+      <span class="see-all" onclick="showToast('Browse all electronics')">See all →</span>
+    </div>
+    <div class="products-row" id="electronicsRow"></div>
+  </div>
+
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-title">Deals in Fashion</div>
+      <span class="see-all" onclick="showToast('Browse all fashion')">See all →</span>
+    </div>
+    <div class="products-row" id="fashionRow"></div>
+  </div>
+
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-title">Top Books</div>
+      <span class="see-all" onclick="showToast('Browse all books')">See all →</span>
+    </div>
+    <div class="products-row" id="booksRow"></div>
+  </div>
+
+</div>
+
+<!-- ===== CART ===== -->
+<div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2>🛒 Shopping Cart</h2>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-body" id="cartBody">
+      <div class="cart-empty">
+        <div style="font-size: 48px;">🛒</div>
+        <p>Your cart is empty</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-subtotal">Subtotal (<span id="cartItemCount">0</span> items): <span id="cartTotal">₹0</span></div>
+      <button class="checkout-btn" onclick="showToast('Proceeding to checkout...')">Proceed to Buy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</div>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Get to Know Us</h4>
+      <ul>
+        <li><a href="#">About Amazon</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press Releases</a></li>
+        <li><a href="#">Amazon Science</a></li>
+        <li><a href="#">Amazon Cares</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect with Us</h4>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Make Money with Us</h4>
+      <ul>
+        <li><a href="#">Sell on Amazon</a></li>
+        <li><a href="#">Affiliate Program</a></li>
+        <li><a href="#">Advertise Your Products</a></li>
+        <li><a href="#">Amazon Pay</a></li>
+        <li><a href="#">Become an Associate</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Let Us Help You</h4>
+      <ul>
+        <li><a href="#">COVID-19 and Amazon</a></li>
+        <li><a href="#">Your Account</a></li>
+        <li><a href="#">Returns Centre</a></li>
+        <li><a href="#">100% Purchase Protection</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo">amazon<span>.in</span></div>
+    <div class="footer-links">
+      <a href="#">Conditions of Use & Sale</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Interest-Based Ads</a>
+    </div>
+    <div class="footer-copy">© 2024, Amazon.com, Inc. or its affiliates. All rights reserved. (Clone)</div>
+  </div>
+</footer>
+
+<script>
+  // ===== DATA =====
+  const products = {
+    electronics: [
+      { id: 1, name: "Samsung Galaxy S24 Ultra 5G (256GB, Titanium Black)", price: 129999, original: 159999, rating: 4.5, reviews: 2847, img: "📱", prime: true },
+      { id: 2, name: "Apple MacBook Air M3 13-inch (8GB RAM, 256GB SSD)", price: 114900, original: 134900, rating: 4.7, reviews: 1523, img: "💻", prime: true },
+      { id: 3, name: "Sony WH-1000XM5 Wireless Noise Cancelling Headphones", price: 26990, original: 34990, rating: 4.6, reviews: 8902, img: "🎧", prime: true },
+      { id: 4, name: "LG 43-inch 4K UHD Smart OLED TV (2024 Model)", price: 44990, original: 64990, rating: 4.4, reviews: 3214, img: "📺", prime: false },
+      { id: 5, name: "Canon EOS R50 Mirrorless Camera with 18-45mm Lens", price: 69990, original: 84990, rating: 4.5, reviews: 876, img: "📷", prime: true },
+      { id: 6, name: "Apple iPad Pro 11-inch M4 (128GB, Wi-Fi)", price: 99900, original: 109900, rating: 4.8, reviews: 4521, img: "📱", prime: true },
+      { id: 7, name: "JBL Flip 6 Waterproof Portable Bluetooth Speaker", price: 7999, original: 11999, rating: 4.4, reviews: 12456, img: "🔊", prime: true },
+      { id: 8, name: "Lenovo IdeaPad Slim 5 Intel Core i5 14-inch Laptop", price: 54990, original: 74990, rating: 4.3, reviews: 2103, img: "💻", prime: false },
+    ],
+    fashion: [
+      { id: 9, name: "Allen Solly Men's Regular Fit Cotton Shirt (XL)", price: 899, original: 1999, rating: 4.2, reviews: 15678, img: "👕", prime: true },
+      { id: 10, name: "Libas Women's Straight Kurta Set (Free Size)", price: 549, original: 1299, rating: 4.0, reviews: 8921, img: "👗", prime: false },
+      { id: 11, name: "Nike Air Max 270 Men's Running Shoes (UK 9)", price: 8995, original: 12995, rating: 4.5, reviews: 4532, img: "👟", prime: true },
+      { id: 12, name: "Lavie Women's Tote Bag with Zip Closure (Black)", price: 1299, original: 2999, rating: 4.1, reviews: 3287, img: "👜", prime: true },
+      { id: 13, name: "Fossil Gen 6 Smartwatch for Men (44mm)", price: 14995, original: 22995, rating: 4.3, reviews: 2145, img: "⌚", prime: true },
+      { id: 14, name: "Puma Men's Regular Fit Track Pants (L, Navy)", price: 799, original: 1599, rating: 4.2, reviews: 9876, img: "👖", prime: false },
+    ],
+    books: [
+      { id: 15, name: "Atomic Habits by James Clear (Paperback)", price: 399, original: 799, rating: 4.8, reviews: 45231, img: "📗", prime: true },
+      { id: 16, name: "The Psychology of Money by Morgan Housel", price: 349, original: 599, rating: 4.7, reviews: 32100, img: "📘", prime: true },
+      { id: 17, name: "Rich Dad Poor Dad by Robert T. Kiyosaki", price: 249, original: 450, rating: 4.6, reviews: 89000, img: "📙", prime: false },
+      { id: 18, name: "Deep Work by Cal Newport (Hardcover)", price: 599, original: 899, rating: 4.5, reviews: 18432, img: "📕", prime: true },
+      { id: 19, name: "The Alchemist by Paulo Coelho (Special Edition)", price: 199, original: 350, rating: 4.7, reviews: 112000, img: "📔", prime: true },
+      { id: 20, name: "Ikigai: The Japanese Secret to a Long Life", price: 179, original: 299, rating: 4.4, reviews: 56000, img: "📒", prime: false },
+    ]
+  };
+
+  let cart = [];
+  let currentSlide = 0;
+  const totalSlides = 3;
+
+  // ===== RENDER PRODUCTS =====
+  function renderProducts(list, containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = list.map(p => {
+      const disc = Math.round((1 - p.price / p.original) * 100);
+      const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(p.rating));
+      return `
+        <div class="product-card" onclick="showToast('${p.name.substring(0,30)}...')">
+          <div class="product-img-wrap">
+            <div style="font-size:60px; display:flex; align-items:center; justify-content:center; height:100%; width:100%;">${p.img}</div>
+          </div>
+          <div class="product-title">${p.name}</div>
+          <div class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))} <span class="review-count">(${p.reviews.toLocaleString()})</span></div>
+          <div class="price-row">
+            <span class="price-small">₹</span><span class="price-big">${Math.floor(p.price/1).toLocaleString()}</span>
+            <br>
+            <span class="original-price">₹${p.original.toLocaleString()}</span>
+            <span class="discount-badge"> ${disc}% off</span>
+          </div>
+          ${p.prime ? '<div class="prime-badge"><span class="prime-icon">prime</span></div>' : ''}
+          <button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  renderProducts(products.electronics, 'electronicsRow');
+  renderProducts(products.fashion, 'fashionRow');
+  renderProducts(products.books, 'booksRow');
+
+  // ===== CART =====
+  function addToCart(id) {
+    const all = [...products.electronics, ...products.fashion, ...products.books];
+    const product = all.find(p => p.id === id);
+    if (!product) return;
+    const existing = cart.find(c => c.id === id);
+    if (existing) existing.qty++;
+    else cart.push({ ...product, qty: 1 });
+    updateCartUI();
+    showToast('✅ Added to cart!');
+  }
+
+  function updateCartUI() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = total;
+    renderCart();
+  }
+
+  function renderCart() {
+    const body = document.getElementById('cartBody');
+    const footer = document.getElementById('cartFooter');
+    if (cart.length === 0) {
+      body.innerHTML = '<div class="cart-empty"><div style="font-size:48px;">🛒</div><p>Your cart is empty</p></div>';
+      footer.style.display = 'none';
+      return;
+    }
+    footer.style.display = 'block';
+    const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+    const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cartItemCount').textContent = totalItems;
+    document.getElementById('cartTotal').textContent = '₹' + totalPrice.toLocaleString();
+
+    body.innerHTML = cart.map(item => `
+      <div class="cart-item-row">
+        <div class="cart-item-img"><div style="font-size:40px;">${item.img}</div></div>
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.name}</div>
+          <div class="cart-item-price">₹${(item.price * item.qty).toLocaleString()}</div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          </div>
+          <div class="cart-remove" onclick="removeFromCart(${item.id})">Remove</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function changeQty(id, delta) {
+    const item = cart.find(c => c.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) removeFromCart(id);
+    else updateCartUI();
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(c => c.id !== id);
+    updateCartUI();
+    showToast('Removed from cart');
+  }
+
+  function openCart() {
+    document.getElementById('cartOverlay').classList.add('open');
+    renderCart();
+  }
+
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('cartOverlay')) closeCart();
+  }
+
+  // ===== HERO SLIDER =====
+  function slideHero(dir) {
+    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+    updateSlider();
+  }
+
+  function goToSlide(n) {
+    currentSlide = n;
+    updateSlider();
+  }
+
+  function updateSlider() {
+    document.getElementById('heroSlider').style.transform = `translateX(-${currentSlide * 100}%)`;
+    document.querySelectorAll('.hero-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  setInterval(() => slideHero(1), 4000);
+
+  // ===== DEAL TIMER =====
+  let totalSeconds = 4 * 3600 + 23 * 60 + 17;
+  setInterval(() => {
+    if (totalSeconds > 0) totalSeconds--;
+    const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+    const s = String(totalSeconds % 60).padStart(2, '0');
+    document.getElementById('dealTimer').textContent = `⏰ ${h}:${m}:${s}`;
+  }, 1000);
+
+  // ===== TOAST =====
+  let toastTimeout;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // ===== SEARCH =====
+  function handleSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    if (q) showToast(`Searching for "${q}"...`);
+    else showToast('Please enter a search term');
+  }
+
+  document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSearch();
+  });
+</script>
+</body>
+</html>
